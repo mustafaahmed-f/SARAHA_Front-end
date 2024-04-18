@@ -36,7 +36,6 @@ function Header() {
   //// Function for intial theme  /////////////////
 
   function intialTheme() {
-    console.log(localStorage.getItem("theme"));
     if (
       localStorage.getItem("theme") === null &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -60,6 +59,9 @@ function Header() {
     <header className="flex justify-between bg-teal-300 align-middle dark:bg-slate-950">
       <Link to="/">
         <img className="w-24" src="./logo_nav.png" />
+      </Link>
+      <Link to="/sendMsg/mustafaAhmed97" className="text-white">
+        Send MSG
       </Link>
       <div className="flex flex-wrap text-center align-middle">
         <div></div>

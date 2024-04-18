@@ -8,9 +8,7 @@ function ErrorElement() {
   //   console.log(error.message);
   return (
     <div className="relative grid h-screen grid-rows-[auto_1fr_auto]">
-      <Header />
       <ErrorUI errMsg={error.message} />
-      <Footer />
     </div>
   );
 }

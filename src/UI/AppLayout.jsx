@@ -1,16 +1,16 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
 import { Login } from "../Features/User/userSlice";
 import { getUserData } from "../Services/userAPIs";
 import store from "../store.js";
-import { refreshToken } from "../Services/tokenRefresh.js";
+import Loader from "./Loader.jsx";
 
 function AppLayout() {
   // const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   useEffect(function () {
     if (
@@ -57,7 +57,8 @@ function AppLayout() {
 
       <div className="overflow-x-hidden overflow-y-scroll py-5">
         <main className="mx-auto h-screen max-w-4xl px-6 py-1 lg:px-0">
-          <Outlet />
+          {navigation.state === "loading" ? <Loader /> : <Outlet />}
+          {/* <Outlet /> */}
         </main>
       </div>
 
@@ -77,17 +78,20 @@ export async function loader() {
     try {
       userData = await getUserData(token);
     } catch (error) {
+      console.log(error.message);
+      if (
+        error.message === "Token is not related to user or user is not found !!"
+      ) {
+        localStorage.removeItem("sarahaLoginToken");
+        window.location.reload();
+        return null;
+      }
       throw new Error(error);
     }
 
-    console.log(userData);
-
     //// Handle case of token is not related to user in DB :
 
-    if (userData.errMsg === "Token is not related to user !!") {
-      localStorage.removeItem("sarahaLoginToken");
-      window.location.reload();
-      return null;
+    if (userData.errMsg) {
     }
 
     store.dispatch(

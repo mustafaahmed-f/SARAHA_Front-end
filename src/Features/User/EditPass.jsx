@@ -1,6 +1,6 @@
-import YupForm from "../Reusable components/YupForm";
-import { updatePassword } from "../Services/userAPIs";
-import { updatePasswordSchema } from "../utils/Schemas";
+import YupForm from "../../Reusable components/YupForm";
+import { updatePassword } from "../../Services/userAPIs";
+import { updatePasswordSchema } from "../../utils/Schemas";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 

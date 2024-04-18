@@ -1,36 +1,42 @@
-import { useState } from "react";
+import { lazy, Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AppLayout from "./UI/AppLayout";
-import Home from "./UI/Home";
-import Messages from "./Features/Messages/Messages";
-import SendMessage from "./Features/Messages/SendMessage";
-import EditProfile from "./Features/User/EditProfile";
-import LogIn from "./Features/Auth/LogIn";
-import SignUp from "./Features/Auth/SignUp";
-import { action as loginAction } from "./Features/Auth/LogIn";
-import { useDispatch } from "react-redux";
+import ErrorElement from "./UI/ErrorElement";
 import UnAuthProtectedRoute from "./UI/UnAuthProtectedRoute";
 import AuthProtectedRoute from "./UI/AuthProtectedRoute";
+const Messages = lazy(() => import("./Features/Messages/Messages"));
+const Home = lazy(() => import("./UI/Home"));
+const LazySendMessage = lazy(() => import("./Features/Messages/SendMessage"));
+const EditProfile = lazy(() => import("./Features/User/EditProfile"));
+const LogIn = lazy(() => import("./Features/Auth/LogIn"));
+const SignUp = lazy(() => import("./Features/Auth/SignUp"));
+const ForgotPassword = lazy(() => import("./Features/Auth/ForgotPassword"));
+const PageNotFound = lazy(() => import("./UI/PageNotFound"));
+const LazyEditNames = lazy(() => import("./Features/User/EditNames"));
+const EditPass = lazy(() => import("./Features/User/EditPass"));
+const SentMessages = lazy(() => import("./Features/Messages/SentMessages"));
+const ReceivedMessages = lazy(
+  () => import("./Features/Messages/ReceivedMessages"),
+);
+import { action as loginAction } from "./Features/Auth/LogIn";
 import { loader as layoutLoader } from "./UI/AppLayout";
-import ForgotPassword from "./Features/Auth/ForgotPassword";
-import PageNotFound from "./UI/PageNotFound";
-import EditNames from "./UI/EditNames";
-import EditPass from "./UI/EditPass";
-import ErrorElement from "./UI/ErrorElement";
-import SentMessages from "./UI/SentMessages";
-import ReceivedMessages from "./UI/ReceivedMessages";
+import { loader as sendMsgLoader } from "./Features/Messages/SendMessage";
+import Loader from "./UI/Loader";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
     loader: layoutLoader,
     errorElement: <ErrorElement />,
+
     children: [
       {
         path: "/",
         element: (
           <UnAuthProtectedRoute>
-            <Home />
+            <Suspense fallback={<Loader />}>
+              <Home />
+            </Suspense>
           </UnAuthProtectedRoute>
         ),
       },
@@ -38,7 +44,9 @@ const router = createBrowserRouter([
         path: "/forgotPass",
         element: (
           <UnAuthProtectedRoute>
-            <ForgotPassword />
+            <Suspense fallback={<Loader />}>
+              <ForgotPassword />
+            </Suspense>
           </UnAuthProtectedRoute>
         ),
       },
@@ -46,17 +54,27 @@ const router = createBrowserRouter([
         path: "/messages",
         element: (
           <AuthProtectedRoute>
-            <Messages />
+            <Suspense fallback={<Loader />}>
+              <Messages />
+            </Suspense>
           </AuthProtectedRoute>
         ),
         children: [
           {
             path: "sentMessages",
-            element: <SentMessages />,
+            element: (
+              <Suspense fallback={<Loader />}>
+                <SentMessages />
+              </Suspense>
+            ),
           },
           {
             path: "receivedMessages",
-            element: <ReceivedMessages />,
+            element: (
+              <Suspense fallback={<Loader />}>
+                <ReceivedMessages />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -64,17 +82,27 @@ const router = createBrowserRouter([
         path: "/editProfile",
         element: (
           <AuthProtectedRoute>
-            <EditProfile />
+            <Suspense fallback={<Loader />}>
+              <EditProfile />
+            </Suspense>
           </AuthProtectedRoute>
         ),
         children: [
           {
             path: "editNames",
-            element: <EditNames />,
+            element: (
+              <Suspense fallback={<Loader />}>
+                <LazyEditNames />
+              </Suspense>
+            ),
           },
           {
             path: "editPass",
-            element: <EditPass />,
+            element: (
+              <Suspense fallback={<Loader />}>
+                <EditPass />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -82,7 +110,9 @@ const router = createBrowserRouter([
         path: "/login",
         element: (
           <UnAuthProtectedRoute>
-            <LogIn />
+            <Suspense fallback={<Loader />}>
+              <LogIn />
+            </Suspense>
           </UnAuthProtectedRoute>
         ),
         action: loginAction,
@@ -91,17 +121,29 @@ const router = createBrowserRouter([
         path: "/signup",
         element: (
           <UnAuthProtectedRoute>
-            <SignUp />
+            <Suspense fallback={<Loader />}>
+              <SignUp />
+            </Suspense>
           </UnAuthProtectedRoute>
         ),
       },
       {
         path: "/sendMsg/:userName",
-        element: <SendMessage />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <LazySendMessage />
+          </Suspense>
+        ),
+        loader: sendMsgLoader,
+        errorElement: <ErrorElement />,
       },
       {
         path: "*",
-        element: <PageNotFound />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <PageNotFound />
+          </Suspense>
+        ),
       },
     ],
   },

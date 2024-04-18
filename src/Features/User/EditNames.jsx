@@ -1,7 +1,7 @@
-import { updateUser } from "../Features/User/userSlice";
-import YupForm from "../Reusable components/YupForm";
-import { updateProfile } from "../Services/userAPIs";
-import { updateProfileSchema } from "../utils/Schemas";
+import { updateUser } from "./userSlice";
+import YupForm from "../../Reusable components/YupForm";
+import { updateProfile } from "../../Services/userAPIs";
+import { updateProfileSchema } from "../../utils/Schemas";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 

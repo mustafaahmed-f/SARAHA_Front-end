@@ -107,3 +107,32 @@ export async function updatePassword(data, token) {
     throw new Error(error);
   }
 }
+
+//==============================================================
+//==============================================================
+
+export async function checkUserName(userName) {
+  try {
+    const res = await fetch(
+      `${baseURL}/saraha/user/checkUserName?userName=${userName}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    const finalData = await res.json();
+
+    //// Handle errMsg sent from APIs :
+
+    if (finalData.errMsg) {
+      throw new Error(finalData.errMsg);
+    }
+
+    return finalData;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
