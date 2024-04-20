@@ -4,6 +4,7 @@ import AppLayout from "./UI/AppLayout";
 import ErrorElement from "./UI/ErrorElement";
 import UnAuthProtectedRoute from "./UI/UnAuthProtectedRoute";
 import AuthProtectedRoute from "./UI/AuthProtectedRoute";
+
 const Messages = lazy(() => import("./Features/Messages/Messages"));
 const Home = lazy(() => import("./UI/Home"));
 const LazySendMessage = lazy(() => import("./Features/Messages/SendMessage"));
@@ -14,13 +15,17 @@ const ForgotPassword = lazy(() => import("./Features/Auth/ForgotPassword"));
 const PageNotFound = lazy(() => import("./UI/PageNotFound"));
 const LazyEditNames = lazy(() => import("./Features/User/EditNames"));
 const EditPass = lazy(() => import("./Features/User/EditPass"));
-const SentMessages = lazy(() => import("./Features/Messages/SentMessages"));
-const ReceivedMessages = lazy(
-  () => import("./Features/Messages/ReceivedMessages"),
-);
+const FinalMessages = lazy(() => import("./Features/Messages/FinalMessages"));
+
+import { receivedLoader } from "./Features/Messages/FinalMessages";
+import { sentLoader } from "./Features/Messages/FinalMessages";
+
 import { action as loginAction } from "./Features/Auth/LogIn";
 import { loader as layoutLoader } from "./UI/AppLayout";
 import { loader as sendMsgLoader } from "./Features/Messages/SendMessage";
+
+import { MessagesContextProvider } from "./Contexts/messagesContext";
+
 import Loader from "./UI/Loader";
 
 const router = createBrowserRouter([
@@ -55,26 +60,30 @@ const router = createBrowserRouter([
         element: (
           <AuthProtectedRoute>
             <Suspense fallback={<Loader />}>
-              <Messages />
+              <MessagesContextProvider>
+                <Messages />
+              </MessagesContextProvider>
             </Suspense>
           </AuthProtectedRoute>
         ),
         children: [
           {
-            path: "sentMessages",
+            path: "sentMessages/:token",
             element: (
               <Suspense fallback={<Loader />}>
-                <SentMessages />
+                <FinalMessages received={false} />
               </Suspense>
             ),
+            loader: sentLoader,
           },
           {
-            path: "receivedMessages",
+            path: "receivedMessages/:token",
             element: (
               <Suspense fallback={<Loader />}>
-                <ReceivedMessages />
+                <FinalMessages received={true} />
               </Suspense>
             ),
+            loader: receivedLoader,
           },
         ],
       },

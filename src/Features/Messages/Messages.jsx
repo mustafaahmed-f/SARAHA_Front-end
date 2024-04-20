@@ -2,12 +2,13 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
+
 function Messages() {
   const [copied, setCopied] = useState(false);
   const username = useSelector((store) => store.user).userName;
+  const token = useSelector((store) => store.user).token;
   const linkElement = useRef();
 
   function handleCopyText(text) {
@@ -73,7 +74,7 @@ function Messages() {
         <div className="flex justify-center py-[1px] align-middle">
           <NavLink
             className="text- mx-auto h-full w-full rounded-md text-center text-slate-950 dark:text-slate-50"
-            to="sentMessages"
+            to={`sentMessages/${token}`}
           >
             Sent
           </NavLink>
@@ -81,7 +82,7 @@ function Messages() {
         <div className="flex justify-center py-[1px] align-middle">
           <NavLink
             className="text- mx-auto h-full w-full rounded-md text-center text-slate-950 dark:text-slate-50"
-            to="receivedMessages"
+            to={`receivedMessages/${token}`}
           >
             Received
           </NavLink>

@@ -1,12 +1,14 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function Message({ msg, sentBy }) {
+function Message({ msg, sentBy, isReceived, sentTo }) {
   return (
     <div className="grid h-fit grid-cols-[1fr_auto] gap-2  rounded-md bg-slate-300 pb-2 dark:bg-slate-600">
       <div className="flex flex-col overflow-hidden ">
         <div className="mb-2 w-fit rounded-tl-md bg-slate-400 p-3 text-sm dark:bg-slate-700 dark:text-slate-50">
-          <span className="font-semibold ">Sent By : </span>
-          {sentBy ?? "Anonymous"}
+          <span className="font-semibold ">
+            {isReceived ? "Sent By : " : "Sent To : "}
+          </span>
+          {isReceived ? sentBy ?? "Anonymous" : sentTo ?? "Anonymous"}
         </div>
         <div className="p-2 dark:text-slate-50">
           <p>{msg}</p>
