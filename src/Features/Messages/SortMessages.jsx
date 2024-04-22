@@ -7,10 +7,14 @@ function SortMessages({ setSort, sort }) {
       <select
         defaultValue={sort}
         onChange={(e) => setSort(e.target.value)}
-        className="rounded-lg bg-slate-400 p-1 dark:bg-slate-500"
+        className="cursor-pointer rounded-lg bg-slate-400 p-1 text-xs dark:bg-slate-500 md:text-lg"
       >
-        <option value={"new"}>Newest to oldest</option>
-        <option value={"old"}>Oldest to newest</option>
+        <option value={"new"} className="text-center ">
+          Newest to oldest
+        </option>
+        <option value={"old"} className="text-center ">
+          Oldest to newest
+        </option>
       </select>
     </div>
   );

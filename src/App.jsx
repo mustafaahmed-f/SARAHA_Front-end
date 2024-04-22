@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import "flowbite";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AppLayout from "./UI/AppLayout";
 import ErrorElement from "./UI/ErrorElement";

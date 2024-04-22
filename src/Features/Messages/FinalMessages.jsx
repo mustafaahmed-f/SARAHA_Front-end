@@ -18,29 +18,72 @@ function FinalMessages({ received }) {
   const isFirstRender = useRef(true);
   const initialMessages = useLoaderData();
   const token = useSelector((state) => state.user.token);
+  const [loading, setLoading] = useState(false);
 
   //// This hook is used to handle messages, sort and pagination.
-  const { page, setPage, messages, setMessages, sort, setSort, getMessages } =
-    useMessages({ intialMsg: initialMessages, initialIsReceived: received });
+  const {
+    page,
+    setPage,
+    messages,
+    setMessages,
+    sort,
+    setSort,
+    getMessages,
+    totalPages,
+    setTotalPages,
+  } = useMessages({ intialMsg: initialMessages, initialIsReceived: received });
 
-  useEffect(
-    function () {
+  async function getMessagesFunc() {
+    try {
       if (isFirstRender.current) {
         isFirstRender.current = false;
         return;
       }
-      getMessages({ token, sort, page });
+      setLoading(true);
+      await getMessages({ token, sort, page });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error || "Error");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function getTotalPagesFunc() {
+    try {
+      await getMessages({ token, sort, page: 1 });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error || "Error");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(
+    function () {
+      getMessagesFunc();
     },
     [page, sort, token],
   );
 
   return (
-    <div className="py-4">
+    <div className="py-2 md:py-4">
       <div className="flex w-full justify-center md:justify-end">
         <SortMessages sort={sort} setSort={setSort} />
       </div>
-      {messages ? (
-        <ShowMessages messages={messages} isReceived={received} />
+      {loading ? (
+        <p className="py-2 text-center text-black dark:text-white md:py-4">
+          Loading ...
+        </p>
+      ) : messages ? (
+        <ShowMessages
+          messages={messages}
+          isReceived={received}
+          getMessagesFunc={getMessagesFunc}
+        />
       ) : null}
     </div>
   );

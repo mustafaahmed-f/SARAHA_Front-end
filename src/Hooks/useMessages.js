@@ -6,6 +6,7 @@ function useMessages({ intialMsg, initialIsReceived }) {
   const [messages, setMessages] = useState(intialMsg);
   const [sort, setSort] = useState("new");
   const [isReceived] = useState(initialIsReceived);
+  const [totalPages, setTotalPages] = useState(1);
 
   //// Is received used to specify if messages to be fetched are sent or received.
 
@@ -30,6 +31,8 @@ function useMessages({ intialMsg, initialIsReceived }) {
     setSort,
     isReceived,
     getMessages,
+    totalPages,
+    setTotalPages,
   };
 }
 

@@ -1,17 +1,20 @@
 import { memo } from "react";
-import Message from "../../UI/Message";
+import Message from "./Message";
 
-const ShowMessages = memo(function ShowMessages({ messages, isReceived }) {
+const ShowMessages = memo(function ShowMessages({
+  messages,
+  isReceived,
+  getMessagesFunc,
+}) {
   return (
-    <div className="mt-4 flex flex-col justify-center py-2">
-      <div className="my-auto flex max-h-[600px] flex-col gap-3 overflow-x-hidden overflow-y-scroll rounded-md bg-white bg-opacity-90 px-9 py-9 opacity-80 backdrop-blur-xl dark:bg-opacity-30 lg:py-10">
+    <div className="mt-2 flex flex-col justify-center py-2 md:mt-4">
+      <div className="my-auto flex max-h-[600px] flex-col gap-3 overflow-x-hidden overflow-y-scroll rounded-md bg-white bg-opacity-90 px-5 py-5 opacity-80 backdrop-blur-xl dark:bg-opacity-30 md:px-9 lg:py-10">
         {messages?.map((el) => (
           <Message
-            sentBy={el?.sentBy?.userName ?? "Anonymous"}
-            sentTo={el?.sentTo}
+            messageElement={el}
             key={el._id}
-            msg={el.content}
             isReceived={isReceived}
+            getMessagesFunc={getMessagesFunc}
           />
         ))}
       </div>

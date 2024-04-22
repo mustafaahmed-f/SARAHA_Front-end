@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import NavItems from "./NavItems";
+import DropList from "./DropList";
 
 function Header() {
+  const user = useSelector((state) => state.user);
   const [dark, setDark] = useState(
     window.matchMedia("(prefers-color-scheme: dark)").matches,
   );
@@ -56,16 +60,21 @@ function Header() {
   //=================================================================================
 
   return (
-    <header className="flex justify-between bg-teal-300 align-middle dark:bg-slate-950">
-      <Link to="/">
+    <header className="grid grid-cols-[auto_1fr_auto] bg-teal-300 align-middle text-black dark:bg-slate-950 dark:text-white">
+      <Link to="/" className="w-fit">
         <img className="w-24" src="../../public/logo_nav.png" />
       </Link>
 
-      <div className="flex flex-wrap text-center align-middle">
-        <div></div>
+      <NavItems />
+      <DropList />
+
+      <div className="flex flex-wrap items-center gap-4 text-center">
+        <div className="hidden md:block">
+          {user.isAuth && `Welcome, ${user.firstName}`}
+        </div>
 
         <span
-          className="flex cursor-pointer pr-2 pt-2 align-middle text-2xl"
+          className="flex cursor-pointer pr-2 align-middle text-2xl"
           onClick={toggleDark}
         >
           {!dark ? "🌙" : "🌞"}

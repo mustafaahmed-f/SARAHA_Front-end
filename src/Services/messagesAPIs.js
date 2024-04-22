@@ -76,6 +76,13 @@ export async function getReceivedMessages({ token, sort = "new", page = 1 }) {
     //// Handle refresh token case :
 
     if (refreshToken(finalData)) {
+      let baseURL = `${window.location.protocol}//${window.location.host}/messages/receivedMessages/${finalData.userToken}`;
+      const newURL = window.location.href.replace(
+        window.location.href,
+        baseURL,
+      );
+      window.location.href = newURL;
+
       const newData = await getReceivedMessages({
         token: finalData.userToken,
         sort,
@@ -112,13 +119,19 @@ export async function getSentMessages({ token, sort = "new", page = 1 }) {
     //// Handle errMsg sent from APIs :
 
     if (finalData.errMsg) {
-      console.log(finalData.errMsg);
       throw new Error(finalData.errMsg);
     }
 
     //// Handle refresh token case :
 
     if (refreshToken(finalData)) {
+      let baseURL = `${window.location.protocol}//${window.location.host}/messages/sentMessages/${finalData.userToken}`;
+      const newURL = window.location.href.replace(
+        window.location.href,
+        baseURL,
+      );
+      window.location.href = newURL;
+
       const newData = await getSentMessages({
         token: finalData.userToken,
         sort,
@@ -205,6 +218,46 @@ export async function numOfSentMessages({ token }) {
         token: finalData.userToken,
         sort,
         page,
+      });
+      return newData;
+    }
+    //// In case of no refresh token, return data directly :
+
+    return finalData;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+//==============================================================
+//====================== Delete Message ========================
+//==============================================================
+
+export async function deleteMessage({ token, id }) {
+  try {
+    const res = await fetch(`${baseURL}/saraha/msg/deleteMessage/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `${tokenBearer}${token}`,
+      },
+    });
+
+    const finalData = await res.json();
+
+    //// Handle errMsg sent from APIs :
+
+    if (finalData.errMsg) {
+      console.log(finalData.errMsg);
+      throw new Error(finalData.errMsg);
+    }
+
+    //// Handle refresh token case :
+
+    if (refreshToken(finalData)) {
+      const newData = await deleteMessage({
+        token: finalData.userToken,
+        id,
       });
       return newData;
     }
