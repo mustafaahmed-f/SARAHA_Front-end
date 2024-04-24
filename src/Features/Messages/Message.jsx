@@ -7,7 +7,7 @@ import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 
 function Message({
   isReceived,
-
+  getTotalPagesFunc,
   getMessagesFunc,
   messageElement,
 }) {
@@ -25,10 +25,13 @@ function Message({
       toast.success("Message deleted successfully");
 
       setLoading(false);
+
+      getTotalPagesFunc();
+
       getMessagesFunc();
     } catch (error) {
       setLoading(false);
-      toast.error(error);
+      toast.error(error.message || error);
     } finally {
       setLoading(false);
     }

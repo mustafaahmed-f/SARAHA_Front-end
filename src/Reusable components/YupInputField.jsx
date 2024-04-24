@@ -28,10 +28,10 @@ function YupInputField({ errors, field, register, label }) {
               : "text"
           }
           placeholder={`enter your ${field} ...`}
-          className={`rounded-full bg-gray-300 px-4 py-1 ring ${errors[`${field}`] ? `ring-red-400 dark:ring-red-500` : `ring-transparent`} focus:outline-0 dark:bg-gray-700 dark:text-slate-100 `}
+          className={`rounded-full bg-gray-300 px-4 py-1 ring placeholder:text-xs placeholder:sm:text-base ${errors[`${field}`] ? `ring-red-400 dark:ring-red-500` : `ring-transparent`} focus:outline-0 dark:bg-gray-700 dark:text-slate-100 `}
         />
         {field === "password" && (
-          <div className="flex gap-1 px-2 py-1 align-middle">
+          <div className="flex items-center gap-1 px-2 py-1">
             <input
               type="checkbox"
               onChange={(e) => setShowPass(e.target.checked)}

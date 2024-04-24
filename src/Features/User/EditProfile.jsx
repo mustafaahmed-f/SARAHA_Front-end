@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 function EditProfile() {
   return (
     <div className="flex flex-col rounded-md bg-slate-50 p-4 dark:bg-slate-800">
-      <h2 className="mb-6 text-center text-3xl dark:text-slate-300 lg:text-4xl">
+      <h2 className="mb-6 text-center text-2xl dark:text-slate-300 lg:text-4xl">
         Edit your Profile
       </h2>
       <div className="mb-6 flex justify-center">
@@ -14,7 +14,7 @@ function EditProfile() {
         />
       </div>
       <div className="editNav mt-8 flex justify-center align-middle">
-        <ul className="flex w-fit flex-nowrap gap-2 rounded-md bg-slate-300 px-1 dark:bg-slate-600">
+        <ul className="flex w-fit flex-nowrap gap-2 rounded-md bg-slate-300 p-1 px-1 text-xs dark:bg-slate-600 sm:text-base">
           <li>
             <NavLink
               className="rounded-md px-2 py-[1px] dark:text-slate-50"

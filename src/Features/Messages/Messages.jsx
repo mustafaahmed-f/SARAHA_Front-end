@@ -30,7 +30,7 @@ function Messages() {
   );
 
   return (
-    <div className="flex flex-col rounded-md bg-slate-50 p-4 dark:bg-slate-800 ">
+    <div className="flex flex-col rounded-md bg-slate-50 p-4 dark:bg-slate-800">
       <h2 className="mb-6 text-center text-3xl dark:text-slate-300 lg:text-4xl">
         My messages
       </h2>
@@ -42,9 +42,9 @@ function Messages() {
       </div>
 
       {/*========================== send message link ================================== */}
-      <div className="mb-3 flex flex-wrap justify-center gap-2 align-middle">
+      <div className="mb-3 flex flex-wrap items-center justify-center gap-2">
         <p className="text-slate-950 dark:text-slate-50">Sarehny : </p>
-        <div className="mx-1 md:mx-3 ">
+        <div className="mx-1 text-xs sm:text-base md:mx-3">
           <Link
             className="text-slate-950 underline underline-offset-1 hover:text-indigo-500 dark:text-slate-50 hover:dark:text-indigo-700"
             to={`/sendMsg/${username}`}
@@ -70,7 +70,7 @@ function Messages() {
 
       {/* ======================== Show messages options ========================= */}
 
-      <div className="mx-auto grid w-1/2 grid-cols-2 gap-2 rounded-lg bg-slate-300 px-2 py-1 dark:bg-slate-600">
+      <div className="mx-auto grid w-1/2 grid-cols-2 gap-2 rounded-lg bg-slate-300 px-2 py-1 text-xs dark:bg-slate-600 sm:text-base">
         <div className="flex justify-center py-[1px] align-middle">
           <NavLink
             className="text- mx-auto h-full w-full rounded-md text-center text-slate-950 dark:text-slate-50"

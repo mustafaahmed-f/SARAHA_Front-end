@@ -29,8 +29,8 @@ function EditPass() {
     { field: "rePassword", label: "Re-Password" },
   ];
   return (
-    <div className="mt-4 flex flex-col justify-center">
-      <div className="my-auto rounded-md bg-white bg-opacity-90 px-9 py-9 opacity-80 backdrop-blur-xl dark:bg-opacity-30 lg:py-10">
+    <div className="flex flex-col justify-center mt-4 text-xs sm:text-base">
+      <div className="my-auto bg-white rounded-md bg-opacity-90 px-9 py-9 opacity-80 backdrop-blur-xl dark:bg-opacity-30 lg:py-10">
         <YupForm
           fields={fieldsArr}
           purpose="Update Password"

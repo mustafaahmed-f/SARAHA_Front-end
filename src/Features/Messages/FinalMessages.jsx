@@ -2,13 +2,16 @@ import { useLoaderData } from "react-router-dom";
 import {
   getReceivedMessages,
   getSentMessages,
+  numOfReceivedMessages,
+  numOfSentMessages,
 } from "../../Services/messagesAPIs";
 import ShowMessages from "./ShowMessages";
 import { useEffect, useRef, useState } from "react";
-import { useMessagesContext } from "../../Contexts/messagesContext";
+
 import useMessages from "../../Hooks/useMessages";
 import { useSelector } from "react-redux";
 import SortMessages from "./SortMessages";
+import MessagesPagination from "../../UI/MessagesPagination";
 
 function FinalMessages({ received }) {
   //// This component is used to show messages ( Received or Sent ) in UI.
@@ -25,7 +28,6 @@ function FinalMessages({ received }) {
     page,
     setPage,
     messages,
-    setMessages,
     sort,
     setSort,
     getMessages,
@@ -33,6 +35,7 @@ function FinalMessages({ received }) {
     setTotalPages,
   } = useMessages({ intialMsg: initialMessages, initialIsReceived: received });
 
+  //// Function for rendering messages at initial render or change of one of these properties ( page, sort, token )
   async function getMessagesFunc() {
     try {
       if (isFirstRender.current) {
@@ -50,17 +53,22 @@ function FinalMessages({ received }) {
     }
   }
 
+  ////function for getting total pages and passing it to the pagination component
   async function getTotalPagesFunc() {
     try {
-      await getMessages({ token, sort, page: 1 });
-      setLoading(false);
+      const numberOfPages = received
+        ? await numOfReceivedMessages({ token })
+        : await numOfSentMessages({ token });
+
+      setTotalPages(numberOfPages.number);
     } catch (error) {
-      setLoading(false);
       throw new Error(error || "Error");
-    } finally {
-      setLoading(false);
     }
   }
+
+  useEffect(function () {
+    getTotalPagesFunc();
+  }, []);
 
   useEffect(
     function () {
@@ -72,19 +80,27 @@ function FinalMessages({ received }) {
   return (
     <div className="py-2 md:py-4">
       <div className="flex w-full justify-center md:justify-end">
-        <SortMessages sort={sort} setSort={setSort} />
+        {messages?.length && <SortMessages sort={sort} setSort={setSort} />}
       </div>
       {loading ? (
         <p className="py-2 text-center text-black dark:text-white md:py-4">
           Loading ...
         </p>
-      ) : messages ? (
+      ) : messages?.length ? (
         <ShowMessages
           messages={messages}
           isReceived={received}
           getMessagesFunc={getMessagesFunc}
+          getTotalPagesFunc={getTotalPagesFunc}
         />
-      ) : null}
+      ) : (
+        <p className="py-2 text-center text-black dark:text-white md:py-4">
+          Your inbox is empty
+        </p>
+      )}
+      {!loading && messages?.length && (
+        <MessagesPagination totalPages={totalPages} />
+      )}
     </div>
   );
 }
@@ -95,6 +111,8 @@ export async function receivedLoader({ params }) {
     return messages.messages;
   } catch (error) {
     throw new Error(error || "Error");
+  } finally {
+    return null;
   }
 }
 
@@ -104,6 +122,8 @@ export async function sentLoader({ params }) {
     return messages.messages;
   } catch (error) {
     throw new Error(error || "Error");
+  } finally {
+    return null;
   }
 }
 

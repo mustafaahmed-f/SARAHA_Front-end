@@ -33,7 +33,7 @@ function EditNames() {
     { field: "lastName", label: "Last Name" },
   ];
   return (
-    <div className="mt-4 flex flex-col justify-center">
+    <div className="mt-4 flex flex-col justify-center text-xs sm:text-base">
       <div className="my-auto rounded-md bg-white bg-opacity-90 px-9 py-9 opacity-80 backdrop-blur-xl dark:bg-opacity-30 lg:py-10">
         <YupForm
           fields={fieldsArr}

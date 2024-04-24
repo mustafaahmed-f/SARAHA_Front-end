@@ -162,7 +162,7 @@ export async function numOfReceivedMessages({ token }) {
     });
 
     const finalData = await res.json();
-    console.log(finalData);
+
     //// Handle errMsg sent from APIs :
 
     if (finalData.errMsg) {
@@ -203,7 +203,7 @@ export async function numOfSentMessages({ token }) {
     });
 
     const finalData = await res.json();
-    console.log(finalData);
+
     //// Handle errMsg sent from APIs :
 
     if (finalData.errMsg) {

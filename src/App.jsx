@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import "flowbite";
+
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AppLayout from "./UI/AppLayout";
 import ErrorElement from "./UI/ErrorElement";
@@ -24,8 +24,6 @@ import { sentLoader } from "./Features/Messages/FinalMessages";
 import { action as loginAction } from "./Features/Auth/LogIn";
 import { loader as layoutLoader } from "./UI/AppLayout";
 import { loader as sendMsgLoader } from "./Features/Messages/SendMessage";
-
-import { MessagesContextProvider } from "./Contexts/messagesContext";
 
 import Loader from "./UI/Loader";
 
@@ -61,9 +59,7 @@ const router = createBrowserRouter([
         element: (
           <AuthProtectedRoute>
             <Suspense fallback={<Loader />}>
-              <MessagesContextProvider>
-                <Messages />
-              </MessagesContextProvider>
+              <Messages />
             </Suspense>
           </AuthProtectedRoute>
         ),
