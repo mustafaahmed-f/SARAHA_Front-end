@@ -53,7 +53,9 @@ function FinalMessages({ received }) {
         {messages?.length && <SortMessages sort={sort} setSort={setSort} />}
       </div>
       {loading ? (
-        <span className="loader"></span>
+        <div className="min-h-[600px]">
+          <span className="loader"></span>
+        </div>
       ) : messages?.length ? (
         <ShowMessages
           messages={messages}
