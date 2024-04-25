@@ -27,13 +27,13 @@ function NavItems() {
         ) : (
           <div className="flex h-full flex-row items-center">
             <Link
-              to="/editProfile"
+              to="/login"
               className="hover:text-teal-600 dark:hover:text-teal-300"
             >
               Log in
             </Link>
             <Link
-              to="/messages"
+              to="/signup"
               className="hover:text-teal-600 dark:hover:text-teal-300"
             >
               Sign up

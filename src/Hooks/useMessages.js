@@ -40,6 +40,7 @@ export function useMessages({ intialMsg, initialIsReceived, token }) {
       }
       setLoading(true);
       await getMessages({ token, sort, page });
+
       setLoading(false);
     } catch (error) {
       setLoading(false);

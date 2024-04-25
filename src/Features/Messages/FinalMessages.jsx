@@ -60,6 +60,7 @@ function FinalMessages({ received }) {
           isReceived={received}
           getMessagesFunc={getMessagesFunc}
           getNumOfMessagesFunc={getNumOfMessagesFunc}
+          setPage={setPage}
         />
       ) : (
         <p className="py-2 text-center text-black dark:text-white md:py-4">

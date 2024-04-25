@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 
-export function usePagination({ numOfMessages, numOfPageElements, setPage }) {
+export function usePagination({
+  numOfMessages,
+  numOfPageElements,
+  setPage,
+  page,
+}) {
   //// Here I used the useEffect to make currentArray calculated synchronously after getting
   //// num. of pages from the API in the useMessages hook
   //// I also used the useMemo twice here so I can avoid infinite re-renders caused by
@@ -26,6 +31,22 @@ export function usePagination({ numOfMessages, numOfPageElements, setPage }) {
 
   useEffect(
     function () {
+      if (currentArray.includes(numOfPages)) {
+        // if (currentArray[currentArray.length - 1] === page + 1) {
+        //   setCurrentArray(
+        //     (prevArray) => (prevArray = prevArray.map((el) => el - 1)),
+        //   );
+        //   console.log("Performed");
+        //   return;
+        // }
+        setCurrentArray(
+          (prevArray) => (prevArray = prevArray.map((el) => el - 1)),
+        );
+        console.log("Performed");
+        return;
+      }
+
+      if (currentArray.includes(page) && currentArray.length > 1) return;
       setCurrentArray(
         arrayOfNumbers.length > numOfPageElements
           ? arrayOfNumbers.slice(0, numOfPageElements)

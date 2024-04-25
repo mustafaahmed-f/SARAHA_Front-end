@@ -6,6 +6,7 @@ function ShowMessages({
   isReceived,
   getMessagesFunc,
   getNumOfMessagesFunc,
+  setPage,
 }) {
   return (
     <div className="mt-2 flex flex-col justify-center py-2 md:mt-4">
@@ -15,8 +16,10 @@ function ShowMessages({
             messageElement={el}
             key={el._id}
             isReceived={isReceived}
+            messagesLength={messages.length}
             getMessagesFunc={getMessagesFunc}
             getNumOfMessagesFunc={getNumOfMessagesFunc}
+            setPage={setPage}
           />
         ))}
       </div>

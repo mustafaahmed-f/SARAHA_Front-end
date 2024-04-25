@@ -10,6 +10,8 @@ function Message({
   getNumOfMessagesFunc,
   getMessagesFunc,
   messageElement,
+  messagesLength,
+  setPage,
 }) {
   const { sentTo, content, sentBy, _id } = messageElement;
   const [loading, setLoading] = useState(false);
@@ -28,7 +30,7 @@ function Message({
 
       getNumOfMessagesFunc();
 
-      getMessagesFunc();
+      messagesLength === 1 ? setPage((prev) => prev - 1) : getMessagesFunc();
     } catch (error) {
       setLoading(false);
       toast.error(error.message || error);

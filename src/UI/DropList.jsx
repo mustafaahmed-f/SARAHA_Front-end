@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function DropList() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const user = useSelector((state) => state.user);
 
   useEffect(function () {
     function handleClickOutside(event) {
@@ -48,22 +50,45 @@ function DropList() {
       {open && (
         <div className="absolute top-9 z-10 w-44 divide-y divide-gray-100 rounded-lg bg-white text-center shadow dark:bg-gray-700">
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-            <li>
-              <Link
-                to="/editProfile"
-                className="hover:text-teal-600 dark:hover:text-teal-300"
-              >
-                Edit Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/messages"
-                className="hover:text-teal-600 dark:hover:text-teal-300"
-              >
-                Messages
-              </Link>
-            </li>
+            {user.isAuth ? (
+              <>
+                <li>
+                  <Link
+                    to="/editProfile"
+                    className="hover:text-teal-600 dark:hover:text-teal-300"
+                  >
+                    Edit Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/messages"
+                    className="hover:text-teal-600 dark:hover:text-teal-300"
+                  >
+                    Messages
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/login"
+                    className="hover:text-teal-600 dark:hover:text-teal-300"
+                  >
+                    Log in
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/signup"
+                    className="hover:text-teal-600 dark:hover:text-teal-300"
+                  >
+                    Sign up
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       )}

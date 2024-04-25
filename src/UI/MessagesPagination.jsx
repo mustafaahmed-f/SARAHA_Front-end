@@ -30,6 +30,7 @@ function MessagesPagination({
     numOfMessages,
     numOfPageElements,
     setPage,
+    page,
   });
 
   //================================================================================
