@@ -15,7 +15,7 @@ export const signUpSchema = yup
   .required();
 
 export const updateProfileSchema = yup.object().shape({
-  isOptional: yup.boolean(), // To make fields optional
+  isOptional: yup.boolean(), //// To make fields optional
   firstName: yup.string().when(["isOptional"], {
     is: (val) => val === false, //// Check if optinal is false >> Apply firstName validations, so it's required
     then: () => generalValidations.firstName,

@@ -1,57 +1,99 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
+import PropTypes from "prop-types";
+import { usePagination } from "../Hooks/usePagination";
 
-const array = [1, 2, 3, 4, 5, 6, 7, 8];
+MessagesPagination.propTypes = {
+  totalPages: PropTypes.number,
+};
 
-function MessagesPagination({ totalPages }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const numOfPages = Math.ceil(totalPages / 6);
-  const arrayOfNumbers = Array.from({ length: numOfPages }, (_, i) => i + 1);
-  const [currentArray, setCurrentArray] = useState(
-    arrayOfNumbers.length > 6 ? arrayOfNumbers.slice(0, 6) : arrayOfNumbers,
-  );
+//TODO: Make the component reusable ( Make the max length of currentArray come from prop,
+//TODO: number of elements in one page & API used )
 
-  console.log(totalPages);
-  console.log(numOfPages);
-  console.log(currentArray);
+function MessagesPagination({
+  numOfMessages,
+  numOfPageElements,
+  setPage,
+  loading,
+  page,
+}) {
+  //// numOfPageElements is the number of page numbers appear in the pagination component
 
-  function handleChangePage() {}
-
-  function nextPage() {}
-
-  function prevPage() {}
+  const {
+    handleChangePage,
+    handleLastNumber,
+    handleFirstNumber,
+    currentArray,
+    numOfPages,
+  } = usePagination({
+    numOfMessages,
+    numOfPageElements,
+    setPage,
+  });
 
   //================================================================================
   //================================================================================
 
-  return (
-    <div className="m-auto flex w-fit flex-row flex-wrap items-center justify-between gap-3 rounded-md bg-slate-300 p-3 align-middle text-black dark:bg-slate-700 dark:text-white">
-      <div className="cursor-pointer text-xs hover:text-teal-500 hover:dark:text-teal-400 md:text-base">
+  return currentArray.length ? (
+    <div
+      className={`m-auto flex w-fit flex-row flex-wrap items-center justify-between gap-3 rounded-md bg-slate-300 p-3 align-middle text-black dark:bg-slate-700 dark:text-white ${loading ? "pointer-events-none opacity-60" : ""}`}
+    >
+      <div
+        className="cursor-pointer text-xs hover:text-teal-500 hover:dark:text-teal-400 md:text-base"
+        onClick={() => handleChangePage(page - 1)}
+      >
         <ArrowBackIcon
           color="inherit"
           sx={{ fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem" } }}
         />
       </div>
+
       <div className="flex flex-row flex-wrap items-center justify-center gap-1 sm:gap-2 md:gap-3">
-        {array.map((item) => (
-          <div
-            className={`numOfPagination ${currentPage === item && "activePage"}`}
+        {currentArray[0] !== 1 && (
+          <span
+            className={`numOfPagination ${page === 1 && "activePage"}`}
+            onClick={handleFirstNumber}
           >
-            <span className="">{item}</span>
+            1
+          </span>
+        )}
+
+        {currentArray[0] >= 3 && <span>....</span>}
+
+        {currentArray.map((item, index) => (
+          <div
+            onClick={() => handleChangePage(item)}
+            className={`numOfPagination ${page === item && "activePage"}`}
+            key={item}
+          >
+            <span>{item}</span>
           </div>
         ))}
-        <span>....</span>
-        <span className="numOfPagination">{numOfPages}</span>
+
+        {currentArray[currentArray.length - 1] <= numOfPages - 2 && (
+          <span>....</span>
+        )}
+
+        {currentArray[currentArray.length - 1] !== numOfPages && (
+          <span
+            className={`numOfPagination ${page === numOfPages && "activePage"}`}
+            onClick={handleLastNumber}
+          >
+            {numOfPages}
+          </span>
+        )}
       </div>
+
       <div className="cursor-pointer hover:text-teal-500 hover:dark:text-teal-400">
         <ArrowForwardIcon
           color="inherit"
           sx={{ fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem" } }}
+          onClick={() => handleChangePage(page + 1)}
         />
       </div>
     </div>
-  );
+  ) : null;
 }
 
 export default MessagesPagination;

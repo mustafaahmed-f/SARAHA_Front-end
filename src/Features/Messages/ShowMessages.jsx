@@ -1,11 +1,11 @@
 import { memo } from "react";
 import Message from "./Message";
 
-const ShowMessages = memo(function ShowMessages({
+function ShowMessages({
   messages,
   isReceived,
   getMessagesFunc,
-  getTotalPagesFunc,
+  getNumOfMessagesFunc,
 }) {
   return (
     <div className="mt-2 flex flex-col justify-center py-2 md:mt-4">
@@ -16,12 +16,12 @@ const ShowMessages = memo(function ShowMessages({
             key={el._id}
             isReceived={isReceived}
             getMessagesFunc={getMessagesFunc}
-            getTotalPagesFunc={getTotalPagesFunc}
+            getNumOfMessagesFunc={getNumOfMessagesFunc}
           />
         ))}
       </div>
     </div>
   );
-});
+}
 
 export default ShowMessages;

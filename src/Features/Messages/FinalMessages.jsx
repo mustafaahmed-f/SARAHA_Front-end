@@ -2,13 +2,11 @@ import { useLoaderData } from "react-router-dom";
 import {
   getReceivedMessages,
   getSentMessages,
-  numOfReceivedMessages,
-  numOfSentMessages,
 } from "../../Services/messagesAPIs";
 import ShowMessages from "./ShowMessages";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 
-import useMessages from "../../Hooks/useMessages";
+import { useMessages } from "../../Hooks/useMessages";
 import { useSelector } from "react-redux";
 import SortMessages from "./SortMessages";
 import MessagesPagination from "../../UI/MessagesPagination";
@@ -18,10 +16,8 @@ function FinalMessages({ received }) {
   //// received prop is used to specify whether messages are received or sent.
   //// received === true ==> received messages are rendered
   //// received === false ==> sent messages are rendered
-  const isFirstRender = useRef(true);
   const initialMessages = useLoaderData();
   const token = useSelector((state) => state.user.token);
-  const [loading, setLoading] = useState(false);
 
   //// This hook is used to handle messages, sort and pagination.
   const {
@@ -30,44 +26,18 @@ function FinalMessages({ received }) {
     messages,
     sort,
     setSort,
-    getMessages,
-    totalPages,
-    setTotalPages,
-  } = useMessages({ intialMsg: initialMessages, initialIsReceived: received });
-
-  //// Function for rendering messages at initial render or change of one of these properties ( page, sort, token )
-  async function getMessagesFunc() {
-    try {
-      if (isFirstRender.current) {
-        isFirstRender.current = false;
-        return;
-      }
-      setLoading(true);
-      await getMessages({ token, sort, page });
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      throw new Error(error || "Error");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  ////function for getting total pages and passing it to the pagination component
-  async function getTotalPagesFunc() {
-    try {
-      const numberOfPages = received
-        ? await numOfReceivedMessages({ token })
-        : await numOfSentMessages({ token });
-
-      setTotalPages(numberOfPages.number);
-    } catch (error) {
-      throw new Error(error || "Error");
-    }
-  }
+    numOfMessages,
+    loading,
+    getMessagesFunc,
+    getNumOfMessagesFunc,
+  } = useMessages({
+    intialMsg: initialMessages,
+    initialIsReceived: received,
+    token: token,
+  });
 
   useEffect(function () {
-    getTotalPagesFunc();
+    getNumOfMessagesFunc();
   }, []);
 
   useEffect(
@@ -83,23 +53,27 @@ function FinalMessages({ received }) {
         {messages?.length && <SortMessages sort={sort} setSort={setSort} />}
       </div>
       {loading ? (
-        <p className="py-2 text-center text-black dark:text-white md:py-4">
-          Loading ...
-        </p>
+        <span className="loader"></span>
       ) : messages?.length ? (
         <ShowMessages
           messages={messages}
           isReceived={received}
           getMessagesFunc={getMessagesFunc}
-          getTotalPagesFunc={getTotalPagesFunc}
+          getNumOfMessagesFunc={getNumOfMessagesFunc}
         />
       ) : (
         <p className="py-2 text-center text-black dark:text-white md:py-4">
           Your inbox is empty
         </p>
       )}
-      {!loading && messages?.length && (
-        <MessagesPagination totalPages={totalPages} />
+      {messages?.length && (
+        <MessagesPagination
+          numOfMessages={numOfMessages}
+          numOfPageElements={6}
+          setPage={setPage}
+          loading={loading}
+          page={page}
+        />
       )}
     </div>
   );

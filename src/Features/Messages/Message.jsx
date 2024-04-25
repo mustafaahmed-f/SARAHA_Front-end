@@ -7,7 +7,7 @@ import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 
 function Message({
   isReceived,
-  getTotalPagesFunc,
+  getNumOfMessagesFunc,
   getMessagesFunc,
   messageElement,
 }) {
@@ -26,7 +26,7 @@ function Message({
 
       setLoading(false);
 
-      getTotalPagesFunc();
+      getNumOfMessagesFunc();
 
       getMessagesFunc();
     } catch (error) {
