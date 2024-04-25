@@ -32,17 +32,10 @@ export function usePagination({
   useEffect(
     function () {
       if (currentArray.includes(numOfPages)) {
-        // if (currentArray[currentArray.length - 1] === page + 1) {
-        //   setCurrentArray(
-        //     (prevArray) => (prevArray = prevArray.map((el) => el - 1)),
-        //   );
-        //   console.log("Performed");
-        //   return;
-        // }
         setCurrentArray(
           (prevArray) => (prevArray = prevArray.map((el) => el - 1)),
         );
-        console.log("Performed");
+
         return;
       }
 
