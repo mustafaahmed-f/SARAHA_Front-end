@@ -33,8 +33,8 @@
       <ul>
         <li>
           git clone :
-          <a href="https://github.com/mustafaahmed-f/E-Commerce-back-end"
-            >https://github.com/mustafaahmed-f/E-Commerce-back-end</a
+          <a href="https://github.com/mustafaahmed-f/SARAHA_Front-end"
+            >https://github.com/mustafaahmed-f/SARAHA_Front-end</a
           >
         </li>
         <li>npm install</li>
