@@ -31,6 +31,7 @@ export function usePagination({
 
   useEffect(
     function () {
+      //// A condition to handle the case where the last page number is included in currentArray
       if (currentArray.includes(numOfPages)) {
         setCurrentArray(
           (prevArray) => (prevArray = prevArray.map((el) => el - 1)),
@@ -39,7 +40,10 @@ export function usePagination({
         return;
       }
 
+      //// A condition to keep the current array without changing it if the page is already in it
+      //// and length of currentArray is greater than 1 (To make sure it isn't the first calculation)
       if (currentArray.includes(page) && currentArray.length > 1) return;
+
       setCurrentArray(
         arrayOfNumbers.length > numOfPageElements
           ? arrayOfNumbers.slice(0, numOfPageElements)

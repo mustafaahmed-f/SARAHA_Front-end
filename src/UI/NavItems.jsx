@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "flowbite";
+import { disableLink } from "../utils/disableLink";
 // initialize components based on data attribute selectors
 
 function NavItems() {
@@ -14,12 +15,14 @@ function NavItems() {
             <Link
               to="/editProfile"
               className="hover:text-teal-600 dark:hover:text-teal-300"
+              onClick={disableLink}
             >
               Edit Profile
             </Link>
             <Link
               to="/messages"
               className="hover:text-teal-600 dark:hover:text-teal-300"
+              onClick={disableLink}
             >
               Messages
             </Link>
@@ -29,12 +32,14 @@ function NavItems() {
             <Link
               to="/login"
               className="hover:text-teal-600 dark:hover:text-teal-300"
+              onClick={disableLink}
             >
               Log in
             </Link>
             <Link
               to="/signup"
               className="hover:text-teal-600 dark:hover:text-teal-300"
+              onClick={disableLink}
             >
               Sign up
             </Link>

@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { disableLink } from "../../utils/disableLink";
 
 function Messages() {
   const [copied, setCopied] = useState(false);
@@ -75,6 +76,7 @@ function Messages() {
           <NavLink
             className="text- mx-auto h-full w-full rounded-md text-center text-slate-950 dark:text-slate-50"
             to={`sentMessages/${token}`}
+            onClick={disableLink}
           >
             Sent
           </NavLink>
@@ -83,6 +85,7 @@ function Messages() {
           <NavLink
             className="text- mx-auto h-full w-full rounded-md text-center text-slate-950 dark:text-slate-50"
             to={`receivedMessages/${token}`}
+            onClick={disableLink}
           >
             Received
           </NavLink>

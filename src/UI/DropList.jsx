@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { disableLink } from "../utils/disableLink";
 
 function DropList() {
   const [open, setOpen] = useState(false);
@@ -56,6 +57,7 @@ function DropList() {
                   <Link
                     to="/editProfile"
                     className="hover:text-teal-600 dark:hover:text-teal-300"
+                    onClick={disableLink}
                   >
                     Edit Profile
                   </Link>
@@ -64,6 +66,7 @@ function DropList() {
                   <Link
                     to="/messages"
                     className="hover:text-teal-600 dark:hover:text-teal-300"
+                    onClick={disableLink}
                   >
                     Messages
                   </Link>
@@ -75,6 +78,7 @@ function DropList() {
                   <Link
                     to="/login"
                     className="hover:text-teal-600 dark:hover:text-teal-300"
+                    onClick={disableLink}
                   >
                     Log in
                   </Link>
@@ -83,6 +87,7 @@ function DropList() {
                   <Link
                     to="/signup"
                     className="hover:text-teal-600 dark:hover:text-teal-300"
+                    onClick={disableLink}
                   >
                     Sign up
                   </Link>

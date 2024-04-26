@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { disableLink } from "../../utils/disableLink";
 
 function EditProfile() {
   return (
@@ -19,6 +20,7 @@ function EditProfile() {
             <NavLink
               className="rounded-md px-2 py-[1px] dark:text-slate-50"
               to="editNames"
+              onClick={disableLink}
             >
               Edit names
             </NavLink>
@@ -27,6 +29,7 @@ function EditProfile() {
             <NavLink
               to="editPass"
               className="rounded-md px-2 py-[1px] dark:text-slate-50"
+              onClick={disableLink}
             >
               Edit password
             </NavLink>

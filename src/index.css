@@ -62,9 +62,9 @@ textarea {
 }
 
 .numOfPagination {
-  @apply mx-1 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full  p-1 text-xs hover:text-teal-500  hover:dark:text-teal-400 sm:h-6 sm:w-6 md:h-8 md:w-8 md:text-base;
+  @apply mx-1 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full p-1 text-xs hover:text-teal-500 hover:dark:text-teal-400 sm:h-6 sm:w-6 md:h-8 md:w-8 md:text-base;
 }
 
 .activePage {
-  @apply bg-slate-700 dark:bg-slate-500;
+  @apply bg-slate-400 dark:bg-slate-500;
 }
