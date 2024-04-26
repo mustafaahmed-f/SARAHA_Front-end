@@ -21,7 +21,7 @@
     <section id="About">
       <h2># About</h2>
       <p>
-        This is the front end of SARAHA project ( It is a full stack project ) created using react.js library
+        This is the front end of SARAHA project ( It is a full stack project ) created using react.js library ( Vite is used as a bundler ).
       </p>
       <p>
         It provides a user authentication system, allowing users to sign up, log in, and manage their profiles. The application features a messaging system where users can send and receive messages. It also includes a responsive and intuitive user interface, as well as pagination for displaying messages.
@@ -38,7 +38,7 @@
           >
         </li>
         <li>npm install</li>
-        <li>nodemon OR npm start</li>
+        <li>npm run dev</li>
       </ul>
       <h3 style="margin-top: 4px">==> Contact me :</h3>
       <p>
