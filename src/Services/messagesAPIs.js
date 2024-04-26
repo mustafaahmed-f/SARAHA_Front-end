@@ -1,7 +1,7 @@
 import { refreshToken } from "./tokenRefresh";
 
-let baseURL = "http://localhost:5000";
-let tokenBearer = "MustafaaaaaaAa__";
+let baseURL = import.meta.env.VITE_BASE_URL;
+let tokenBearer = import.meta.env.VITE_BEARER_TOKEN;
 
 //==============================================================
 //======================= sendMessage ==========================

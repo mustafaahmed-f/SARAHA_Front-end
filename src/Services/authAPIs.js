@@ -1,4 +1,4 @@
-let baseURL = "http://localhost:5000";
+let baseURL = import.meta.env.VITE_BASE_URL;
 
 export async function signUp(data) {
   try {
