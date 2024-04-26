@@ -48,7 +48,7 @@
     </section>
     <hr />
     <section id="features">
-    <h3 style="margin-top: 4px">==> Features :</h3>
+    <h3 style="margin-top: 4px"># Features :</h3>
       <ul>
         <li>User Authentication: The project includes features for user authentication, such as login, signup, logout, and forgot password.</li>
         <li>User Profile Management: The project allows users to edit their profile, including their names and password.</li>
