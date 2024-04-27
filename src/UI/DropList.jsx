@@ -1,12 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { disableLink } from "../utils/disableLink";
+import { LogOut } from "../Features/User/userSlice";
+import { useTranslation } from "react-i18next";
 
 function DropList() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+
+  function Logout() {
+    dispatch(LogOut());
+    localStorage.removeItem("sarahaLoginToken");
+    window.location.reload();
+  }
 
   useEffect(function () {
     function handleClickOutside(event) {
@@ -59,7 +69,7 @@ function DropList() {
                     className="hover:text-teal-600 dark:hover:text-teal-300"
                     onClick={disableLink}
                   >
-                    Edit Profile
+                    {t("Edit Profile")}
                   </Link>
                 </li>
                 <li>
@@ -68,7 +78,15 @@ function DropList() {
                     className="hover:text-teal-600 dark:hover:text-teal-300"
                     onClick={disableLink}
                   >
-                    Messages
+                    {t("Messages")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="hover:text-teal-600 dark:hover:text-teal-300"
+                    onClick={Logout}
+                  >
+                    {t("Log out")}
                   </Link>
                 </li>
               </>
@@ -80,7 +98,7 @@ function DropList() {
                     className="hover:text-teal-600 dark:hover:text-teal-300"
                     onClick={disableLink}
                   >
-                    Log in
+                    {t("Log in")}
                   </Link>
                 </li>
                 <li>
@@ -89,7 +107,7 @@ function DropList() {
                     className="hover:text-teal-600 dark:hover:text-teal-300"
                     onClick={disableLink}
                   >
-                    Sign up
+                    {t("Sign up")}
                   </Link>
                 </li>
               </>

@@ -35,17 +35,17 @@ function YupForm({
   });
 
   const handleSubmitFn = (data) => {
-    if (purpose === "Sign up") {
+    if (purpose === "Sign up" || purpose === "انشاء حساب") {
       unregister("rePassword");
     }
-    if (purpose === "Update Profile") {
+    if (purpose === "Update Profile" || purpose === "تحديث الملف الشخصي") {
       unregister("isOptional");
     }
     submitFunction(data);
   };
   return (
     <form onSubmit={handleSubmit(handleSubmitFn)}>
-      {purpose === "Update Profile" && (
+      {(purpose === "Update Profile" || purpose === "تحديث الملف الشخصي") && (
         <input
           name="isOptional"
           {...register("isOptional")}

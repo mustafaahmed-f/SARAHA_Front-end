@@ -8,6 +8,8 @@ import { getUserData } from "../Services/userAPIs";
 import store from "../store.js";
 import Loader from "./Loader.jsx";
 
+import ToggleLanguage from "./ToggleLanguage.jsx";
+
 function AppLayout() {
   // const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -55,10 +57,11 @@ function AppLayout() {
         />
       </div>
 
+      <ToggleLanguage />
+
       <div className="overflow-x-hidden overflow-y-scroll py-5">
         <main className="mx-auto h-screen max-w-4xl px-6 py-1 lg:px-0">
           {navigation.state === "loading" ? <Loader /> : <Outlet />}
-          {/* <Outlet /> */}
         </main>
       </div>
 

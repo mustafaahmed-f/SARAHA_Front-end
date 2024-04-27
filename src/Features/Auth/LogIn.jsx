@@ -7,6 +7,7 @@ import { logIn } from "../../Services/authAPIs.js";
 import { Login } from "../User/userSlice.js";
 import store from "../../store.js";
 import { redirect } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const errors = {
   email: "",
@@ -22,6 +23,7 @@ function LogIn() {
     changeEmail,
     changePassword,
   } = useLoginForm();
+  const { t, i18n } = useTranslation();
 
   // emailInputVal = myEmailInputElement.current.value;
   // passwordInputVal = myPasswordInputElement.current.value;

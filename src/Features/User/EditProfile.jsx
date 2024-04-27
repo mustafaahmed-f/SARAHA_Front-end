@@ -1,12 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { disableLink } from "../../utils/disableLink";
+import { useTranslation } from "react-i18next";
 
 function EditProfile() {
+  const { t, i18n } = useTranslation();
   return (
     <div className="flex flex-col rounded-md bg-slate-50 p-4 dark:bg-slate-800">
       <h2 className="mb-6 text-center text-2xl dark:text-slate-300 lg:text-4xl">
-        Edit your Profile
+        {t("Edit your Profile")}
       </h2>
       <div className="mb-6 flex justify-center">
         <img
@@ -22,7 +24,7 @@ function EditProfile() {
               to="editNames"
               onClick={disableLink}
             >
-              Edit names
+              {t("Edit names")}
             </NavLink>
           </li>
           <li>
@@ -31,7 +33,7 @@ function EditProfile() {
               className="rounded-md px-2 py-[1px] dark:text-slate-50"
               onClick={disableLink}
             >
-              Edit password
+              {t("Edit password")}
             </NavLink>
           </li>
         </ul>

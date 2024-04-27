@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { deleteMessage } from "../../Services/messagesAPIs";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
+import { useTranslation } from "react-i18next";
 
 function Message({
   isReceived,
@@ -16,6 +17,7 @@ function Message({
   const { sentTo, content, sentBy, _id } = messageElement;
   const [loading, setLoading] = useState(false);
   const token = useSelector((store) => store.user).token;
+  const { t, i18n } = useTranslation();
 
   async function handleDeleteMsg(id) {
     const loadingToast = toast.loading("Deleting message ...");
@@ -44,9 +46,11 @@ function Message({
       <div className="flex flex-col overflow-hidden ">
         <div className="mb-2 w-fit rounded-tl-md bg-slate-400 p-3 text-xs dark:bg-slate-700 dark:text-slate-50 sm:text-sm">
           <span className="font-semibold ">
-            {isReceived ? "Sent By : " : "Sent To : "}
+            {isReceived ? `${t("Sent By")} : ` : `${t("Sent To")} : `}
           </span>
-          {isReceived ? sentBy?.userName ?? "Anonymous" : sentTo ?? "Anonymous"}
+          {isReceived
+            ? sentBy?.userName ?? `${t("Anonymous")}`
+            : sentTo ?? `${t("Anonymous")}`}
         </div>
         <div className="p-2 text-sm dark:text-slate-50 md:text-lg">
           <p>{content}</p>

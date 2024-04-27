@@ -17,12 +17,12 @@ export const signUpSchema = yup
 export const updateProfileSchema = yup.object().shape({
   isOptional: yup.boolean(), //// To make fields optional
   firstName: yup.string().when(["isOptional"], {
-    is: (val) => val === false, //// Check if optinal is false >> Apply firstName validations, so it's required
+    is: (val) => val === true, //// Check if optinal is false >> Apply firstName validations, so it's required
     then: () => generalValidations.firstName,
     otherwise: () => yup.string().optional(),
   }),
   lastName: yup.string().when(["isOptional"], {
-    is: (val) => val === false, //// Check if optinal is false >> Apply lastName validations, so it's required
+    is: (val) => val === true, //// Check if optinal is false >> Apply lastName validations, so it's required
     then: () => generalValidations.lastName,
     otherwise: () => yup.string().optional(),
   }),

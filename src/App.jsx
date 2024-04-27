@@ -12,7 +12,7 @@ const LazySendMessage = lazy(() => import("./Features/Messages/SendMessage"));
 const EditProfile = lazy(() => import("./Features/User/EditProfile"));
 const LogIn = lazy(() => import("./Features/Auth/LogIn"));
 const SignUp = lazy(() => import("./Features/Auth/SignUp"));
-const ForgotPassword = lazy(() => import("./Features/Auth/ForgotPassword"));
+
 const PageNotFound = lazy(() => import("./UI/PageNotFound"));
 const LazyEditNames = lazy(() => import("./Features/User/EditNames"));
 const EditPass = lazy(() => import("./Features/User/EditPass"));
@@ -44,16 +44,7 @@ const router = createBrowserRouter([
           </UnAuthProtectedRoute>
         ),
       },
-      {
-        path: "/forgotPass",
-        element: (
-          <UnAuthProtectedRoute>
-            <Suspense fallback={<Loader />}>
-              <ForgotPassword />
-            </Suspense>
-          </UnAuthProtectedRoute>
-        ),
-      },
+
       {
         path: "/messages",
         element: (

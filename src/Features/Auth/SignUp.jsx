@@ -4,10 +4,12 @@ import YupForm from "../../Reusable components/YupForm";
 import { signUp } from "../../Services/authAPIs";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 function SignUp() {
   const schema = signUpSchema;
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   // const { unregister } = useForm();
 
   async function signUpFunc(data) {

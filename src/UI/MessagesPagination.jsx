@@ -3,6 +3,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { usePagination } from "../Hooks/usePagination";
+import { useTranslation } from "react-i18next";
 
 MessagesPagination.propTypes = {
   totalPages: PropTypes.number,
@@ -32,6 +33,7 @@ function MessagesPagination({
     setPage,
     page,
   });
+  const { t, i18n } = useTranslation();
 
   //================================================================================
   //================================================================================
@@ -41,7 +43,7 @@ function MessagesPagination({
       className={`m-auto flex w-fit flex-row flex-wrap items-center justify-between gap-3 rounded-md bg-slate-300 p-3 align-middle text-black dark:bg-slate-700 dark:text-white ${loading ? "pointer-events-none opacity-60" : ""}`}
     >
       <div
-        className="cursor-pointer text-xs hover:text-teal-500 hover:dark:text-teal-400 md:text-base"
+        className={`cursor-pointer text-xs hover:text-teal-500 hover:dark:text-teal-400 md:text-base ${i18n.language === "ar" && "rotate-180"}`}
         onClick={() => handleChangePage(page - 1)}
       >
         <ArrowBackIcon
@@ -86,7 +88,9 @@ function MessagesPagination({
         )}
       </div>
 
-      <div className="cursor-pointer hover:text-teal-500 hover:dark:text-teal-400">
+      <div
+        className={`cursor-pointer hover:text-teal-500 hover:dark:text-teal-400 ${i18n.language === "ar" && "rotate-180"}`}
+      >
         <ArrowForwardIcon
           color="inherit"
           sx={{ fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem" } }}

@@ -3,12 +3,14 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NavItems from "./NavItems";
 import DropList from "./DropList";
+import { useTranslation } from "react-i18next";
 
 function Header() {
   const user = useSelector((state) => state.user);
   const [dark, setDark] = useState(
     window.matchMedia("(prefers-color-scheme: dark)").matches,
   );
+  const { t, i18n } = useTranslation();
 
   //=================================================================================
   //=================================================================================
@@ -70,7 +72,7 @@ function Header() {
 
       <div className="flex flex-wrap items-center gap-4 text-center">
         <div className="hidden md:block">
-          {user.isAuth && `Welcome, ${user.firstName}`}
+          {user.isAuth && `${t("Welcome")}, ${user.firstName}`}
         </div>
 
         <span
