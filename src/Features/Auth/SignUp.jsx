@@ -24,24 +24,24 @@ function SignUp() {
   }
 
   const fieldsArr = [
-    { field: "firstName", label: "First Name" },
-    { field: "lastName", label: "Last Name" },
-    { field: "userName", label: "User name" },
-    { field: "email", label: "Email" },
-    { field: "password", label: "Password" },
-    { field: "rePassword", label: "Re-Password" },
+    { field: "firstName", label: `${t("First Name")}` },
+    { field: "lastName", label: `${t("Last Name")}` },
+    { field: "userName", label: `${t("User name")}` },
+    { field: "email", label: `${t("Email")}` },
+    { field: "password", label: `${t("Password")}` },
+    { field: "rePassword", label: `${t("Re-Password")}` },
   ];
   return (
     <div className="flex flex-col justify-center">
       <div className="my-auto rounded-md bg-white bg-opacity-90 px-9 py-9 opacity-80 backdrop-blur-xl dark:bg-opacity-30 lg:py-10">
         <h2 className="mb-10 text-3xl dark:text-slate-300 lg:text-4xl">
-          Create new account
+          {t("Create new account")}
         </h2>
         <YupForm
           fields={fieldsArr}
-          purpose="Sign up"
+          purpose={`${t("Sign up")}`}
           mySchema={schema}
-          extraField="Already have account ?"
+          extraField={`${t("Already have account ?")}`}
           extraLink="/login"
           submitFunction={signUpFunc}
         />

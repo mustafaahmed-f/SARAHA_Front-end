@@ -32,11 +32,11 @@ function LogIn() {
     <div className="flex flex-col justify-center">
       <div className="my-auto rounded-md bg-white bg-opacity-90 px-9 py-9 opacity-80 backdrop-blur-xl dark:bg-opacity-30 lg:py-10">
         <h2 className="mb-10 text-3xl dark:text-slate-300 lg:text-4xl">
-          Member Login
+          {t("Member Login")}
         </h2>
         <Form method="POST">
           <InputField
-            placeholder={"enter your email ..."}
+            placeholder={`${t("enter your email")} ...`}
             myRef={myEmailInputElement}
             onChange={changeEmail}
             errMsg={emailErr}
@@ -45,7 +45,7 @@ function LogIn() {
           />
 
           <InputField
-            placeholder={"enter your password ..."}
+            placeholder={`${t("enter your password")} ...`}
             myRef={myPasswordInputElement}
             onChange={changePassword}
             errMsg={passwordErr}
@@ -54,17 +54,17 @@ function LogIn() {
           />
           <div className="my-4 flex w-full justify-end">
             <p className="cursor-pointer hover:text-blue-500 dark:hover:text-blue-200">
-              <Link>Forgot password ?</Link>
+              <Link>{t("Forgot password ?")}</Link>
             </p>
           </div>
           <div className="w-full">
-            <Button>Log in</Button>
+            <Button>{t("Log in")}</Button>
           </div>
         </Form>
 
         <div className="mt-4 flex w-full justify-center">
           <p className="cursor-pointer hover:text-blue-500 dark:hover:text-blue-200">
-            <Link to="/signup">Create account ?</Link>
+            <Link to="/signup">{t("Create account ?")}</Link>
           </p>
         </div>
       </div>
