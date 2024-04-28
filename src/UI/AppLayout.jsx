@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet, useNavigation } from "react-router-dom";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Login } from "../Features/User/userSlice";
 import { getUserData } from "../Services/userAPIs";
@@ -14,35 +14,38 @@ function AppLayout() {
   // const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  useEffect(function () {
-    if (
-      localStorage.getItem("theme") === "Dark" ||
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      document.documentElement.classList.add("dark");
+  //// Function to perform dark mode ////////////////
+
+  const performDarkMode = useCallback(function performDarkMode() {
+    localStorage.setItem("theme", "Dark");
+    document.documentElement.classList.add("dark");
+  }, []);
+
+  //// Function to perform light mode  ///////////////
+
+  const performLightMode = useCallback(function performLightMode() {
+    localStorage.setItem("theme", "Light");
+    document.documentElement.classList.remove("dark");
+  }, []);
+
+  //// Function for intial theme  /////////////////
+
+  const intialTheme = useCallback(() => {
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme === "Dark") {
+      performDarkMode();
+    } else if (currentTheme === "Light") {
+      performLightMode();
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      performDarkMode();
     } else {
-      document.documentElement.classList.remove("dark");
+      performLightMode();
     }
   }, []);
 
-  // useEffect(function () {
-  //   async function getUserFromToken() {
-  //     if (localStorage.getItem("sarahaLoginToken")) {
-  //       let token = localStorage.getItem("sarahaLoginToken");
-  //       const userData = await getUserData(token);
-  //       dispatch(
-  //         Login(
-  //           userData.user_Details.userName,
-  //           userData.user_Details.firstName,
-  //           token,
-  //         ),
-  //       );
-  //       console.log(userData);
-  //     }
-  //   }
-
-  //   getUserFromToken();
-  // }, []);
+  useEffect(function () {
+    intialTheme();
+  }, []);
 
   return (
     <div className="relative grid h-screen grid-rows-[auto_1fr_auto]">

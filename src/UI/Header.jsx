@@ -33,29 +33,23 @@ function Header() {
 
   //// Function to toggle mode /////////////////
 
-  function toggleDark() {
+  const toggleDark = useCallback(() => {
     localStorage.getItem("theme") === "Light"
       ? performDarkMode()
       : performLightMode();
-  }
-
-  //// Function for intial theme  /////////////////
-
-  function intialTheme() {
-    if (
-      localStorage.getItem("theme") === null &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      performDarkMode();
-    } else if (localStorage.getItem("theme")) {
-      localStorage.getItem("theme") === "Dark"
-        ? performDarkMode()
-        : performLightMode();
-    }
-  }
+  });
 
   useEffect(function () {
-    intialTheme();
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme === "Dark") {
+      setDark(true);
+    } else if (currentTheme === "Light") {
+      setDark(false);
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setDark(true);
+    } else {
+      setDark(false);
+    }
   }, []);
 
   //=================================================================================
