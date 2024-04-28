@@ -10,6 +10,7 @@ import { useMessages } from "../../Hooks/useMessages";
 import { useSelector } from "react-redux";
 import SortMessages from "./SortMessages";
 import MessagesPagination from "../../UI/MessagesPagination";
+import { useTranslation } from "react-i18next";
 
 function FinalMessages({ received }) {
   //// This component is used to show messages ( Received or Sent ) in UI.
@@ -35,6 +36,8 @@ function FinalMessages({ received }) {
     initialIsReceived: received,
     token: token,
   });
+
+  const { t, i18n } = useTranslation();
 
   useEffect(function () {
     getNumOfMessagesFunc();
@@ -66,7 +69,7 @@ function FinalMessages({ received }) {
         />
       ) : (
         <p className="py-2 text-center text-black dark:text-white md:py-4">
-          Your inbox is empty
+          {t("Your inbox is empty")}
         </p>
       )}
       {messages?.length && (
