@@ -87,7 +87,7 @@
       </p>
       <p>
         Main Link :
-        <a href="illustrious-kleicha-1c7bce.netlify.app"
+        <a href="https://illustrious-kleicha-1c7bce.netlify.app/" target="_blank"
           >illustrious-kleicha-1c7bce.netlify.app</a
         >
       </p>
