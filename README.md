@@ -58,6 +58,7 @@
         <li>State Management: The project uses Redux Toolkit for state management, which helps in managing the application state.</li>
         <li>Routing: The project uses React Router DOM for routing, allowing different components to be rendered based on the URL.</li>
         <li>Code Splitting: The project uses React's lazy and Suspense components for code splitting, which helps in optimizing the loading time of the application.</li>
+        <li>Multi Language support : Using i18next library, English and Arabic languages are supported on the web application.</li>
       </ul>
       </section>
       <hr />
@@ -71,6 +72,7 @@
         <li>PropTypes: PropTypes are used for type-checking props.</li>
         <li>react-hot-toast: Used for displaying toast notifications.</li>
         <li>Jest : For testing and debugging</li>
+        <li>i18next : For multi language support</li>
       </ul>
     </section>
     <hr /> 
