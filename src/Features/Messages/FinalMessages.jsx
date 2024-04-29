@@ -39,9 +39,12 @@ function FinalMessages({ received }) {
 
   const { t, i18n } = useTranslation();
 
-  useEffect(function () {
-    getNumOfMessagesFunc();
-  }, []);
+  useEffect(
+    function () {
+      getNumOfMessagesFunc();
+    },
+    [token],
+  );
 
   useEffect(
     function () {
