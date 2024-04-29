@@ -50,6 +50,8 @@ function FinalMessages({ received }) {
     [page, sort, token],
   );
 
+  console.log(messages,loading)
+
   return (
     <div className="py-2 md:py-4">
       <div className="flex w-full justify-center md:justify-end">
