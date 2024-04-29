@@ -58,7 +58,7 @@ function Header() {
   return (
     <header className="grid grid-cols-[auto_1fr_auto] bg-teal-300 align-middle text-black dark:bg-slate-950 dark:text-white">
       <Link to="/" className="w-fit">
-        <img className="w-24" src="./logo_nav.png" />
+        <img className="w-24" src="./public/logo_nav.png" />
       </Link>
 
       <NavItems />
