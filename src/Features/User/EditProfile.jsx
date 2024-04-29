@@ -12,7 +12,7 @@ function EditProfile() {
       </h2>
       <div className="mb-6 flex justify-center">
         <img
-          src="new_male.jpg"
+          src="https://saraha-by-mustafa.netlify.app/new_male.jpg"
           className="w-20 dark:brightness-75 dark:filter md:w-36"
         />
       </div>
