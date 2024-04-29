@@ -79,13 +79,16 @@
   <section id="Deployment">
       <h2># Deployment</h2>
       <p>
-        Deployed on render.com synchronized with github repository and connected
-        with mongoDB atlas
+        Deployed on netlify synchronized with github repository and connected
+        to the back-end which is uploaded on ( onrender ).
+      </p>
+      <p>
+        ====> Note : First request after a time of inactivity may take some time before returning response. Back-end becomes inactive on onrender when it doesn't receive any requests for a while.
       </p>
       <p>
         Main Link :
-        <a href="https://ecommercebymustafa.onrender.com"
-          >https://ecommercebymustafa.onrender.com</a
+        <a href="https://saraha-by-mustafa.netlify.app" target="_blank"
+          >https://saraha-by-mustafa.netlify.app</a
         >
       </p>
     </section>
