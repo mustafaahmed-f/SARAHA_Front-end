@@ -20,6 +20,8 @@ function FinalMessages({ received }) {
   const initialMessages = useLoaderData();
   const token = useSelector((state) => state.user.token);
 
+  console.log("Initial messages", initialMessages);
+
   //// This hook is used to handle messages, sort and pagination.
   const {
     page,
@@ -53,7 +55,7 @@ function FinalMessages({ received }) {
     [page, sort, token],
   );
 
-  console.log(messages,loading)
+  console.log("Messages", messages);
 
   return (
     <div className="py-2 md:py-4">
@@ -96,8 +98,6 @@ export async function receivedLoader({ params }) {
     return messages.messages;
   } catch (error) {
     throw new Error(error || "Error");
-  } finally {
-    return null;
   }
 }
 
@@ -107,8 +107,6 @@ export async function sentLoader({ params }) {
     return messages.messages;
   } catch (error) {
     throw new Error(error || "Error");
-  } finally {
-    return null;
   }
 }
 
