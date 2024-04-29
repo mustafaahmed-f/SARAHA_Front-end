@@ -5,6 +5,7 @@ import { checkUserName } from "../../Services/userAPIs";
 import { useSelector } from "react-redux";
 import { sendMessage } from "../../Services/messagesAPIs";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 function SendMessage() {
   const [msg, setMsg] = useState("");
@@ -13,6 +14,7 @@ function SendMessage() {
   const [loading, setLoading] = useState(false);
   const user = useSelector((store) => store.user);
   const loadingToast = toast;
+  const { t, i18n } = useTranslation();
 
   let msgLength = msg.length;
 
@@ -69,7 +71,7 @@ function SendMessage() {
   return (
     <div className="flex flex-col gap-10 rounded-md bg-slate-50 p-4 py-8 text-black dark:bg-slate-900 dark:text-white md:gap-14">
       <h2 className="text-center text-2xl font-bold">
-        Send a message to <span className="font-light">{userName}</span>
+        {t("Send a message to")} <span className="font-light">{userName}</span>
       </h2>
       <div className="flex flex-col gap-5">
         <textarea
@@ -94,7 +96,7 @@ function SendMessage() {
                 setAnonymous(e.target.checked);
               }}
             />
-            <span>Send anonymously</span>
+            <span>{t("Send anonymously")}</span>
           </div>
           <div>{msgLength} / 1000</div>
         </div>
@@ -104,7 +106,7 @@ function SendMessage() {
         onClick={handleSendMessage}
         className={`w-full rounded-full bg-teal-400 px-7 py-2 hover:${!msgLength ? "" : "bg-teal-600"} dark:bg-slate-950 dark:text-white dark:hover:${!msgLength ? "" : "bg-slate-800"} sm:w-fit`}
       >
-        {loading ? "Loading ..." : "Send message"}
+        {loading ? `${t("Loading ...")}` : `${t("Send message")}`}
       </button>
     </div>
   );
