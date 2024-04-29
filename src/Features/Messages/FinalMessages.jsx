@@ -20,8 +20,6 @@ function FinalMessages({ received }) {
   const initialMessages = useLoaderData();
   const token = useSelector((state) => state.user.token);
 
-  console.log("Initial messages", initialMessages);
-
   //// This hook is used to handle messages, sort and pagination.
   const {
     page,
@@ -44,7 +42,6 @@ function FinalMessages({ received }) {
   useEffect(
     function () {
       getNumOfMessagesFunc();
-      console.log("useEffect used to get num. of messages");
     },
     [token],
   );
@@ -52,12 +49,9 @@ function FinalMessages({ received }) {
   useEffect(
     function () {
       getMessagesFunc();
-      console.log("useEffect used to get messages");
     },
     [page, sort, token],
   );
-
-  console.log("Messages", messages);
 
   return (
     <div className="py-2 md:py-4">
@@ -101,7 +95,6 @@ export async function receivedLoader({ params }) {
   } catch (error) {
     return new Error(error || "Error");
   }
-  // return null;
 }
 
 export async function sentLoader({ params }) {
@@ -111,7 +104,6 @@ export async function sentLoader({ params }) {
   } catch (error) {
     return new Error(error || "Error");
   }
-  // return null;
 }
 
 export default FinalMessages;
