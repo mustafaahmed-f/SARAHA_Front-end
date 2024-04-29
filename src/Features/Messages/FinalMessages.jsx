@@ -44,6 +44,7 @@ function FinalMessages({ received }) {
   useEffect(
     function () {
       getNumOfMessagesFunc();
+      console.log("useEffect used to get num. of messages");
     },
     [token],
   );
@@ -51,6 +52,7 @@ function FinalMessages({ received }) {
   useEffect(
     function () {
       getMessagesFunc();
+      console.log("useEffect used to get messages");
     },
     [page, sort, token],
   );
@@ -95,19 +97,21 @@ function FinalMessages({ received }) {
 export async function receivedLoader({ params }) {
   try {
     const messages = await getReceivedMessages({ token: params.token });
-    return messages.messages;
+    return messages.messages || null;
   } catch (error) {
-    throw new Error(error || "Error");
+    return new Error(error || "Error");
   }
+  // return null;
 }
 
 export async function sentLoader({ params }) {
   try {
     const messages = await getSentMessages({ token: params.token });
-    return messages.messages;
+    return messages.messages || null;
   } catch (error) {
-    throw new Error(error || "Error");
+    return new Error(error || "Error");
   }
+  // return null;
 }
 
 export default FinalMessages;
